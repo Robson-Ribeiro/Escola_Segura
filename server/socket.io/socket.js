@@ -14,6 +14,10 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log("New connection:", socket.id);
+
+  socket.on("joinRoom", (data) => {
+    console.log("User joined the room");
+  });
 });
 
 export { server, app, io };

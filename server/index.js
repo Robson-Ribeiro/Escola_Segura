@@ -7,11 +7,15 @@ import mongoose from 'mongoose';
 import { server, app } from "./socket.io/socket.js";
 
 import authRoutes from "./routes/authRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
+import roomRoutes from "./routes/roomRoutes.js";
 
 
 app.use(express.json());
 
 app.use("/auth", authRoutes);
+app.use("/message", messageRoutes);
+app.use("/room", roomRoutes);
 
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
