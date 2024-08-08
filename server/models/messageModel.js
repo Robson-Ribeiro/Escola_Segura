@@ -11,6 +11,11 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  type: {
+    type: String,
+    required: true,
+    enum: ["message", "alert"],
+  }
 }, { timestamps: true });
 
 const MessageModel = mongoose.model("Message", messageSchema);
