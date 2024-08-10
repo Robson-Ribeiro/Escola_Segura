@@ -4,6 +4,6 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/send", authMiddleware, sendMessageToRoom);
+router.post("/send/:id", authMiddleware, sendMessageToRoom);
 
 export default router;

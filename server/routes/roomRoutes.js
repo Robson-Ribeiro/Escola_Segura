@@ -5,7 +5,7 @@ import authMiddleware from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.get("/getRooms", authMiddleware, getRooms);
-router.get("/getRoom", authMiddleware, getRoom);
+router.get("/getRoom/:id", authMiddleware, getRoom);
 router.post("/create", authMiddleware, createRoom);
 
 export default router;

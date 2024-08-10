@@ -1,4 +1,4 @@
-import RoomModel from "../models/roomModel"
+import RoomModel from "../models/roomModel.js"
 
 export  const createRoom = async (req, res) => {
   const roomCreator = req.user.id;
@@ -21,14 +21,14 @@ export  const createRoom = async (req, res) => {
 }
 
 export const getRoom = async (req, res) => {
-  const { roomId } = req.body;
+  const roomId = req.params.id;
   if(!roomId) return res.status(400).json({ error: "Your request did not include all required fields!"});
 
   try {
     const room = await RoomModel.findById(roomId).populate("users").populate("messages");
     if(!room) return res.status(400).json({ error: "Your request did not include a valid room id!"});
 
-    const formattedRoom = { ...room, users: room.users.map(user => {
+    const formattedRoom = { roomName: room.roomName, messages: room.messages, users: room.users.map(user => {
       return { 
         id: user._id,
         name: user.name,

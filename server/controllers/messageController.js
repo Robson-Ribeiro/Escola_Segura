@@ -1,8 +1,8 @@
-import RoomModel from "../models/roomModel";
-import MessageModel from "../models/messageModel";
+import RoomModel from "../models/roomModel.js";
+import MessageModel from "../models/messageModel.js";
 
 export const sendMessageToRoom = async (req, res) => {
-  const roomId = req.params.roomId;
+  const roomId = req.params.id;
   const authorId = req.user.id;
   const { text, type } = req.body;
 
@@ -11,7 +11,7 @@ export const sendMessageToRoom = async (req, res) => {
   }
 
   try {
-    const room = await RoomModel.findById({ roomId });
+    const room = await RoomModel.findById(roomId);
     if(!room) {
       return res.status(400).json({ error: "The room informed does not exist!"});
     }
@@ -24,6 +24,7 @@ export const sendMessageToRoom = async (req, res) => {
 
     //WebSocket...
 
+    return res.status(200).json({ newMessage, room })
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Something went wrong, try again later!"});
